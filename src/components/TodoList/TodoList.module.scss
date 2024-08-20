@@ -1,20 +1,29 @@
-.todoItem {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+.todoList {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
 }
 
-.completed {
-  text-decoration: line-through;
-  color: gray;
-}
-
-.actions {
+.todoInput {
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
   cursor: pointer;
 }

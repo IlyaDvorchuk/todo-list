@@ -1,55 +1,42 @@
 import {FC, useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodosStart,
-    fetchTodosSuccess,
-    addTodo,
-    updateTodo,
-    deleteTodo } from '../../store/reducers/Todos/TodosSlice';
 import TodoItem from '../TodoItem/TodoItem';
 import Loader from '../Loader/Loader';
 import styles from './TodoList.module.scss';
-import {RootState} from "../../store/store";
 import {Todo} from "../../store/reducers/Todos/TodosTypes";
+import {
+    useAddTodoMutation,
+    useDeleteTodoMutation,
+    useFetchTodosQuery,
+    useUpdateTodoMutation
+} from "../../services/todoApi";
 
 const TodoList: FC = () => {
-    const dispatch = useDispatch();
-    const { items, loading } = useSelector((state: RootState) => state.todos);
+    const { data: todos, error, isFetching } = useFetchTodosQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+    });
+    const [addTodo] = useAddTodoMutation();
+    const [updateTodo] = useUpdateTodoMutation();
+    const [deleteTodo] = useDeleteTodoMutation();
     const [text, setText] = useState('');
 
-    useEffect(() => {
-        dispatch(fetchTodosStart());
-
-        setTimeout(() => {
-            const mockTodos: Todo[] = [
-                { id: '1', text: 'Learn React', completed: false },
-                { id: '2', text: 'Learn Redux', completed: true },
-                { id: '3', text: 'Learn TypeScript', completed: false },
-            ];
-
-            dispatch(fetchTodosSuccess(mockTodos));
-        }, 1000);
-    }, [dispatch]);
-
-    const handleAddTodo = () => {
+    const handleAddTodo = async () => {
         if (text.trim()) {
-            dispatch(addTodo({
+            await addTodo({
                 id: Date.now().toString(),
                 text,
                 completed: false,
-            }));
+            }).unwrap();
             setText('');
         }
     };
 
-    const handleToggleTodo = (id: string) => {
-        const todo = items.find(todo => todo.id === id);
-        if (todo) {
-            dispatch(updateTodo({ ...todo, completed: !todo.completed }));
-        }
+    const handleToggleTodo = async (todo: Todo) => {
+        console.log('updateTodo', updateTodo)
+        await updateTodo({ ...todo, completed: !todo.completed }).unwrap();
     };
 
-    const handleDeleteTodo = (id: string) => {
-        dispatch(deleteTodo(id));
+    const handleDeleteTodo = async (id: string) => {
+        await deleteTodo(id).unwrap();
     };
 
     return (
@@ -63,14 +50,16 @@ const TodoList: FC = () => {
                 />
                 <button onClick={handleAddTodo}>Add</button>
             </div>
-            {loading ? (
+            {isFetching ? (
                 <Loader />
+            ) : error ? (
+                <div>Error occurred</div>
             ) : (
-                items.map(todo => (
+                todos?.map((todo) => (
                     <TodoItem
                         key={todo.id}
                         todo={todo}
-                        onToggle={() => handleToggleTodo(todo.id)}
+                        onToggle={() => handleToggleTodo(todo)}
                         onDelete={() => handleDeleteTodo(todo.id)}
                     />
                 ))
