@@ -1,6 +1,7 @@
 import styles from './TodoItem.module.scss';
 import {Todo} from "../../store/reducers/Todos/TodosTypes";
 import {FC} from "react";
+import Button from "../Button/Button";
 
 interface TodoItemProps {
     todo: Todo;
@@ -15,8 +16,14 @@ const TodoItem: FC<TodoItemProps> = ({ todo, onToggle, onDelete }) => {
                 className={`${styles.todoTitle} ${todo.completed ? styles.completed : ''}`}
                 onClick={onToggle}>{todo.text}</span>
             <div className={styles.actions}>
-                <button onClick={onToggle}>{todo.completed ? 'Undo' : 'Complete'}</button>
-                <button onClick={onDelete}>Delete</button>
+                <Button
+                    text={todo.completed ? 'Undo' : 'Complete'}
+                    onClick={onToggle}
+                />
+                <Button
+                    text={'Delete'}
+                    onClick={onDelete}
+                />
             </div>
         </div>
     );

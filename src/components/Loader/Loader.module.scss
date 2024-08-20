@@ -1,15 +1,17 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
 .loaderWrapper {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  @include flex(center);
 }
 
 .loader {
-  border: 16px solid #f3f3f3;
+  border: 1.6rem solid $borerLoaderColor;
   border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 60px;
-  height: 60px;
+  border-top: 1.6rem solid $activeColor;
+  width: 6rem;
+  height: 6rem;
   animation: spin 2s linear infinite;
 }
 

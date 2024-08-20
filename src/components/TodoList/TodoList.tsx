@@ -9,6 +9,7 @@ import {
     useFetchTodosQuery,
     useUpdateTodoMutation
 } from "../../services/todoApi";
+import Button from "../Button/Button";
 
 const TodoList: FC = () => {
     const { data: todos, error, isFetching } = useFetchTodosQuery(undefined, {
@@ -47,7 +48,7 @@ const TodoList: FC = () => {
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Add new task"
                 />
-                <button onClick={handleAddTodo}>Add</button>
+                <Button text={'Add'} onClick={handleAddTodo}/>
             </div>
             {isFetching ? (
                 <Loader />

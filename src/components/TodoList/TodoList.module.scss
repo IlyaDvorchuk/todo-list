@@ -1,29 +1,31 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
 .todoList {
-  max-width: 400px;
+  max-width: 40rem;
   margin: 0 auto;
-  border: 1px solid #ccc;
+  border: 1px solid $additionalBorderColor;
   border-radius: 4px;
-  padding: 20px;
+  padding: 2rem;
 }
 
 .todoInput {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  @include flex(null, null, 1rem);
+  margin-bottom: 2rem;
 }
 
 input {
   flex-grow: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 1rem;
+  border: 1px solid $additionalBorderColor;
+  border-radius: .4rem;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   border: none;
-  background-color: #3498db;
-  color: white;
+  background-color: $activeColor;
+  color: $additionalTextColor;
   border-radius: 4px;
   cursor: pointer;
 }

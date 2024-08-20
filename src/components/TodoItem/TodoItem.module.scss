@@ -1,28 +1,23 @@
-.todoItem {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
+  @import "src/styles/variables";
+  @import "src/styles/mixins";
 
-.todoTitle {
-  font-size: 20px;
-  margin-bottom: 1rem;
-}
+  .todoItem {
+    @include flex(space-between, center);
+    flex-direction: column;
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
 
-.completed {
-  text-decoration: line-through;
-  color: gray;
-}
+  .todoTitle {
+    font-size: $mediumFontSize;
+    margin-bottom: 1rem;
+  }
 
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
+  .completed {
+    text-decoration: line-through;
+    color: $completedColor;
+  }
 
-button {
-  width: 110px;
-  cursor: pointer;
-}
+  .actions {
+    @include flex(center, null, 1rem);
+  }

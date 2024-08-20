@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+
+.button {
+  width: 11rem;
+  height: 4rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0 1.2em;
+  font-size: $smallFontSize;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: $buttonColor;
+  cursor: pointer;
+  transition: .4s all linear;
+
+  &:hover {
+    background-color: transparent;
+    color: $buttonColor;
+    border: 1px solid $buttonColor;
+  }
+}
