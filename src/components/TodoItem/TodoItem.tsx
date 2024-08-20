@@ -10,8 +10,10 @@ interface TodoItemProps {
 
 const TodoItem: FC<TodoItemProps> = ({ todo, onToggle, onDelete }) => {
     return (
-        <div className={`${styles.todoItem} ${todo.completed ? styles.completed : ''}`}>
-            <span onClick={onToggle}>{todo.text}</span>
+        <div className={styles.todoItem}>
+            <span
+                className={`${styles.todoTitle} ${todo.completed ? styles.completed : ''}`}
+                onClick={onToggle}>{todo.text}</span>
             <div className={styles.actions}>
                 <button onClick={onToggle}>{todo.completed ? 'Undo' : 'Complete'}</button>
                 <button onClick={onDelete}>Delete</button>
