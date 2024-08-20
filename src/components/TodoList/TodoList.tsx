@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useState} from 'react';
 import TodoItem from '../TodoItem/TodoItem';
 import Loader from '../Loader/Loader';
 import styles from './TodoList.module.scss';
@@ -25,18 +25,17 @@ const TodoList: FC = () => {
                 id: Date.now().toString(),
                 text,
                 completed: false,
-            }).unwrap();
+            });
             setText('');
         }
     };
 
     const handleToggleTodo = async (todo: Todo) => {
-        console.log('updateTodo', updateTodo)
-        await updateTodo({ ...todo, completed: !todo.completed }).unwrap();
+        await updateTodo({ ...todo, completed: !todo.completed });
     };
 
     const handleDeleteTodo = async (id: string) => {
-        await deleteTodo(id).unwrap();
+        await deleteTodo(id);
     };
 
     return (
